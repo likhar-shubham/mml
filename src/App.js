@@ -1,23 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Routes, Route } from 'react-router-dom';
+import { Container } from '@mui/material';
+import Navbar from './components/Header/Navbar';
+import HomePage from './components/Home/HomePage';
+import Contacts from './components/Contacts/Contacts';
+import LostLeads from './components/LostLeads/LostLeads';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Bebas Neue', 'cursive'
+    ].join(','),
+  },
+});
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={theme}>
+        <Container maxWidth="xl">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/contacts" element={<Contacts/>} />
+            <Route path="/lostleads" element={<LostLeads/>} />
+          </Routes>
+        </Container>
+      </ThemeProvider>
     </div>
   );
 }
